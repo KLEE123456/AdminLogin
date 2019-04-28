@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klee.AdminLogin.mapper.AdminMapper">
+    <resultMap id="myResultMap" type="admin">
+        <id property="adminId" column="adminid"/>
+        <result property="adminName" column="adminname"/>
+        <result property="adminPhone" column="adminphone"/>
+        <result property="adminSex" column="adminsex"/>
+        <result property="adminPwd" column="adminpwd"/>
+    </resultMap>
+    <select id="findAdmin" resultMap="myResultMap" parameterType="admin">
+          select  * from  admin_  where  adminname=#{adminName} and adminpwd=#{adminPwd}
+    </select>
+    <insert id="registerAdmin" parameterType="admin">
+          insert  into  admin_ values (default ,#{adminName} ,#{adminPhone} ,#{adminPwd},#{adminSex})
+    </insert>
+
+</mapper>
