@@ -3,11 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+  <!--  <settings>
+        <setting name="LogImpl" value="LOG4J"/>
+    </settings>-->
     <!--为类取别名 -->
     <typeAliases>
         <package name="com.klee.AdminLogin.pojo" />
     </typeAliases>
-
 
 </configuration>

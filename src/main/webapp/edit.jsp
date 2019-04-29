@@ -9,11 +9,16 @@
 <%
     String path=request.getContextPath();
 %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>Register</title>
     <script src="<%=path%>/js/jquery-3.3.1.js" type="text/javascript"></script>
     <script type="text/javascript">
+        $(document).ready(function(){
+            document.getElementById("adminsex${admin.adminSex}").checked="checked";
+        });
+
         $(function () {
             $("#regbtn").click(function () {
                 var adminname=$("#adminname").val();
@@ -44,23 +49,24 @@
 </head>
 <body>
     <center>
-    <form action="register.do" method="post" id="form" name="form" style="background-color: aliceblue">
-        <h2>用户注册界面</h2>
+    <form action="edit.do" method="post" id="form" name="form" style="background-color: aliceblue">
+        <input type="hidden" name="adminid" id="adminid" value="${admin.adminId}">
+        <h2>用户编辑界面</h2>
         <p></p>
         <font>用户名:</font>
-        <input type="text" name="adminname"  id="adminname">
+        <input type="text" name="adminname"  id="adminname" value="${admin.adminName}">
         <p/>
         &nbsp;<font>密码:</font>
-        <input type="password" name="adminpwd"  id="adminpwd">
+        <input type="password" name="adminpwd"  id="adminpwd" value="${admin.adminPwd}">
         <p/>
         &nbsp;<font>电话:</font>
-        <input type="text" name="adminphone"  id="adminphone">
+        <input type="text" name="adminphone"  id="adminphone" value="${admin.adminPhone}">
         <p/>
         <font>性别:</font> &nbsp;
         <input type="radio" name="adminsex" id="adminsex男" value="男"><label for="adminsex男">男</label>
         <input type="radio" name="adminsex" id="adminsex女" value="女"><label for="adminsex女">女</label>
         <p/>
-        <input type="button" value="确定注册" id="regbtn" name="regbtn">
+        <input type="button" value="确定修改" id="regbtn" name="regbtn">
     </form>
     </center>
 </body>

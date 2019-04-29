@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 @Controller
@@ -22,21 +23,20 @@ import java.io.PrintWriter;
 public class LogingServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;utf-8");
-        String adminName=request.getParameter("adminname");
         String adminPwd=request.getParameter("adminpwd");
         String MD5AdminPwd= Md5Encrypt.MD5(adminPwd);
+        String adminName=request.getParameter("adminname");
+        PrintWriter out=response.getWriter();
         Admin admin=new Admin();
         admin.setAdminName(adminName);
         admin.setAdminPwd(MD5AdminPwd);
+        HttpSession session=request.getSession();
+        session.setAttribute("admin",admin);
         ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
         LoginService loginService = (LoginService) context.getBean("loginService");
         Admin admin1 = loginService.findAdminSerivce(admin);
-        PrintWriter out=response.getWriter();
         if (admin1!=null){
-            out.println("<script>alert('登录成功!');location.href='home.jsp'</script>");
+            request.getRequestDispatcher("selectAll.do").forward(request,response);
         }
         else {
             out.println("<script>alert('登录失败!');history.back()</script>");

@@ -11,10 +11,23 @@
         <result property="adminPwd" column="adminpwd"/>
     </resultMap>
     <select id="findAdmin" resultMap="myResultMap" parameterType="admin">
-          select  * from  admin_  where  adminname=#{adminName} and adminpwd=#{adminPwd}
+          select  * from  admin_ where adminname=#{adminName} and adminpwd=#{adminPwd}
     </select>
     <insert id="registerAdmin" parameterType="admin">
           insert  into  admin_ values (default ,#{adminName} ,#{adminPhone} ,#{adminPwd},#{adminSex})
     </insert>
+    <select  id="findAllAdmin" resultMap="myResultMap">
+          select * from  admin_
+    </select>
+    <delete id="deleteAdmin" parameterType="string">
+          delete   from  admin_  where adminid=#{id}
+    </delete>
+    <update id="editAdmin" parameterType="admin">
+        update  admin_  set  adminname=#{adminName} ,adminphone=#{adminPhone} ,adminpwd=#{adminPwd}  ,adminsex=#{adminSex}
+        where adminid=#{adminId}
+    </update>
+    <select id="xRAdmin" resultMap="myResultMap" parameterType="integer">
+        select  * from  admin_ where adminid=#{id}
+    </select>
 
 </mapper>

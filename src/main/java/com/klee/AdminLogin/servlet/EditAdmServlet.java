@@ -1,7 +1,7 @@
 package com.klee.AdminLogin.servlet;
 
 import com.klee.AdminLogin.pojo.Admin;
-import com.klee.AdminLogin.service.RegisterService;
+import com.klee.AdminLogin.service.EditAdmService;
 import com.klee.AdminLogin.utils.Md5Encrypt;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -14,29 +14,31 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/register.do")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/edit.do")
+public class EditAdmServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String adminName=request.getParameter("adminname");
         String adminPwd=request.getParameter("adminpwd");
-        String MD5adminPwd= Md5Encrypt.MD5(adminPwd);
+        String md5Pwd = Md5Encrypt.MD5(adminPwd);
         String adminPhone=request.getParameter("adminphone");
         String adminSex=request.getParameter("adminsex");
+        String adminId=request.getParameter("adminid");
         Admin admin=new Admin();
-        admin.setAdminName(adminName);
-        admin.setAdminPwd(MD5adminPwd);
+        admin.setAdminId(Integer.parseInt(adminId));
+        admin.setAdminPwd(md5Pwd);
         admin.setAdminPhone(adminPhone);
         admin.setAdminSex(adminSex);
+        admin.setAdminName(adminName);
         ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
-        RegisterService registerService =(RegisterService) context.getBean("registerService");
-        int rows = registerService.registerAdminService(admin);
+        EditAdmService editAdmService=(EditAdmService) context.getBean("editAdmService");
+        int rows = editAdmService.editAdmin(admin);
         PrintWriter out=response.getWriter();
         if (rows>0){
-            out.println("<script>alert('注册成功!');location.href='index.jsp'</script>");
+            out.println("<script>alert('编辑成功!');location.href='selectAll.do'</script>");
         }
-        else {
-            out.println("<script>alert('注册失败!');history.back()</script>");
+        else{
+            out.println("<script>alert('编辑失败!');location.href='selectAll.do'</script>");
         }
     }
 }
