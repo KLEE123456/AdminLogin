@@ -1,17 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: KLEE
-  Date: 2019/4/28
-  Time: 22:51
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path=request.getContextPath();
 %>
 <html>
 <head>
-    <title>Register</title>
+    <title>Add</title>
     <script src="<%=path%>/js/jquery-3.3.1.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
@@ -26,17 +20,19 @@
                         url:'checkReg',
                         data:{adminName:adminname},
                         success:function (data) {
-                            if (data==1){
+                            if (data==1) {
 
                             }
                             if (data==0){
-                                alert("用户名已经存在，请进行更改");
+
+                                alert('该用户名称已经存在,请更换!');
                             }
                         }
                     })
                 }
             })
-            $("#regbtn").click(function () {
+
+            $("#addbtn").click(function () {
                 var adminname=$("#adminname").val();
                 var adminpwd=$("#adminpwd").val();
                 var adminphone=$("#adminphone").val();
@@ -61,12 +57,13 @@
 
             })
         })
+
     </script>
 </head>
 <body>
-    <center>
-    <form action="register.do" method="post" id="form" name="form" style="background-color: aliceblue">
-        <h2>用户注册界面</h2>
+<center>
+    <form action="add.do" method="post" id="form" name="form" style="background-color: aliceblue">
+        <h2>用户添加界面</h2>
         <p></p>
         <font>用户名:</font>
         <input type="text" name="adminname"  id="adminname">
@@ -81,8 +78,8 @@
         <input type="radio" name="adminsex" id="adminsex男" value="男"><label for="adminsex男">男</label>
         <input type="radio" name="adminsex" id="adminsex女" value="女"><label for="adminsex女">女</label>
         <p/>
-        <input type="button" value="确定注册" id="regbtn" name="regbtn">
+        <input type="button" value="确定" id="addbtn" name="addbtn">
     </form>
-    </center>
+</center>
 </body>
 </html>

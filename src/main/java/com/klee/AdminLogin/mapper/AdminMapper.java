@@ -11,4 +11,6 @@ public interface AdminMapper {
     int deleteAdmin(String id);
     int editAdmin(Admin admin);
     Admin xRAdmin(int id);
+    Admin findAdminByName(String adminName);
+    int insertAdmin(Admin admin);
 }

@@ -16,4 +16,12 @@ public class RegisterServiceImpl implements RegisterService {
         int rows = adminMapper.registerAdmin(admin);
         return rows;
     }
+
+    @Override
+    public Admin findAdminByName(String adminName) {
+        ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
+        AdminMapper adminMapper = context.getBean(AdminMapper.class);
+        Admin admin=adminMapper.findAdminByName(adminName);
+        return admin;
+    }
 }

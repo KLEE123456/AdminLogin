@@ -30,16 +30,16 @@ public class LogingServlet extends HttpServlet {
         Admin admin=new Admin();
         admin.setAdminName(adminName);
         admin.setAdminPwd(MD5AdminPwd);
-        HttpSession session=request.getSession();
-        session.setAttribute("admin",admin);
         ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
         LoginService loginService = (LoginService) context.getBean("loginService");
+        HttpSession session=request.getSession();
         Admin admin1 = loginService.findAdminSerivce(admin);
+        session.setAttribute("admin",admin1);
         if (admin1!=null){
             request.getRequestDispatcher("selectAll.do").forward(request,response);
         }
         else {
-            out.println("<script>alert('登录失败!');history.back()</script>");
+            out.println("<script>alert('登录失败,用户名或密码错误!');history.back()</script>");
         }
     }
 }

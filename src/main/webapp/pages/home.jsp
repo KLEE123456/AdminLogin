@@ -19,12 +19,22 @@
                 location.href='<%=path%>/delete.do?adminid='+adminId;
             }
         }
+        $(function () {
+            $("#add").click(function () {
+                location.href='../add.jsp';
+            })
+            $("#rlogin").click(function () {
+                $("#form1").submit();
+            })
+
+        })
     </script>
 </head>
 <body bgcolor="#6495ed">
 <center><h2>***************欢迎进入系统***************</h2></center>
 
         <table width="90%" align="center"  >
+            <input type="button" value="新增" name="add" id="add" style="background-color: cornflowerblue" >
             <tr align="center" bgcolor="#ffebcd" height="30px">
                 <td>序号</td>
                 <td>用户id</td>
@@ -61,5 +71,12 @@
             </c:otherwise>
         </c:choose>
         </table>
+        <p/>
+    <form id="form1" name="form1" action="reLogin" method="post">
+        <input type="button" id="rlogin" name="rlogin" value="从新登录" style="width: 100px;background-color: beige;color:olivedrab;margin-left:700px">
+    </form>
+
+
+
 </body>
 </html>
