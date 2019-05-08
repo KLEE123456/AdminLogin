@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/xr.do")
@@ -17,6 +18,9 @@ public class XRServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String adminId=request.getParameter("adminid");
+        String pageNum=request.getParameter("pageNum");
+        HttpSession session=request.getSession();
+        session.setAttribute("pageNum",pageNum);
         ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
         XRAdminSerrvice xRAdminSerrvice = (XRAdminSerrvice)context.getBean("xRAdminSerrvice");
         Admin admin = xRAdminSerrvice.xRAdmin(Integer.parseInt(adminId));

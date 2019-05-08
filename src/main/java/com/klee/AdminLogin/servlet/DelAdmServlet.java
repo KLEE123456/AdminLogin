@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -18,7 +19,10 @@ public class DelAdmServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String adminId=request.getParameter("adminid");
+        String pageNum=request.getParameter("pageNum");
         ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
+        HttpSession session=request.getSession();
+        session.setAttribute("pageNum",pageNum);
         DelAdmService delAdmService=(DelAdmService)context.getBean("delAdmService");
         int rows = delAdmService.deleteAdmin(adminId);
         PrintWriter out=response.getWriter();

@@ -21,11 +21,11 @@
                         data:{adminName:adminname},
                         success:function (data) {
                             if (data==1) {
-
+                                document.getElementById("addbtn").disabled=false;
                             }
                             if (data==0){
-
-                                alert('该用户名称已经存在,请更换!');
+                               document.getElementById("addbtn").disabled=true;
+                                alert('该用户已经存在,请更换!');
                             }
                         }
                     })
@@ -66,7 +66,7 @@
         <h2>用户添加界面</h2>
         <p></p>
         <font>用户名:</font>
-        <input type="text" name="adminname"  id="adminname">
+        <input type="text" name="adminname"  id="adminname" >
         <p/>
         &nbsp;<font>密码:</font>
         <input type="password" name="adminpwd"  id="adminpwd">

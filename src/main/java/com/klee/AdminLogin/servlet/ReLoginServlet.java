@@ -15,8 +15,6 @@ import java.io.PrintWriter;
 public class ReLoginServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out=response.getWriter();
-        out.print("hello world！");
         HttpSession session = request.getSession();
         session.invalidate();
         response.sendRedirect("index.jsp");

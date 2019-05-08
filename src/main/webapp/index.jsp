@@ -4,7 +4,11 @@
 %>
 <html>
     <head>
+        <link href="<%=path%>/bootstrap/bootstrap.css" rel="stylesheet"/>
+        <link href="<%=path%>/bootstrap-table/bootstrap-table.css" rel="stylesheet"/>
         <script src="<%=path%>/js/jquery-3.3.1.js" type="text/javascript"></script>
+        <script src="<%=path%>/bootstrap/bootstrap.js" type="text/javascript"></script>
+        <script src="<%=path%>/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(function () {
                 $("#loginbtn").click(function () {
@@ -26,38 +30,53 @@
             });
         </script>
         <style type="text/css">
+            div{
+                width: 400px;
+                height: 500px;
+                margin: 0 auto;
+                background-color:#b1dfbb;
+                border-radius: 10px;
 
+            }
         </style>
     </head>
     <body>
-
-        <center><h2>用户登录界面</h2></center>
+        <div>
+        <center><h3 style="color: #005cbf">用户登录界面</h3></center>
         <center>
-        <form action="login.do" method="post" id="form" name="form" >
-            <table  width="300px" bgcolor="#faebd7">
+        <form action="login.do" method="post" id="form" name="form">
+            <table  width="300px" >
                 <tr height="70px">
                     <td>用户名:</td>
                     <td>
-                        <input type="text" id="adminname" name="adminname">
+                        <input type="text" id="adminname" name="adminname" >
                     </td>
                 </tr>
                 <tr>
-                    <td>密码:</td>
+                    <td>密&nbsp;&nbsp;&nbsp;码:</td>
                     <td>
                         <input type="password" id="adminpwd" name="adminpwd">
                     </td>
                 </tr>
-                <tr align="left">
-                    <td>
-                        <input type="button" value="登录" id="loginbtn" name="loginbtn">
+                <tr height="30px">
+                    <td></td>
+                </tr>
+                <tr >
+                    <td colspan="2">
+                        <input type="button" value="登录" id="loginbtn" name="loginbtn" style="width: 100%;background-color: #005cbf;color: white">
                     </td>
-                    <td>
-                        <input type="button" value="注册" id="resbtn" name="resbtn">
+                </tr>
+                <tr  align="right">
+                    <td colspan="2">
+                        <a href="register.jsp" style="text-decoration: none;color:red"><i>注册</i>>>></a>
                     </td>
+
                 </tr>
             </table>
         </form>
+
         </center>
+        </div>
 
     </body>
 </html>

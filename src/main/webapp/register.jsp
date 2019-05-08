@@ -27,10 +27,11 @@
                         data:{adminName:adminname},
                         success:function (data) {
                             if (data==1){
-
+                                document.getElementById("regbtn").disabled=false;
                             }
                             if (data==0){
                                 alert("用户名已经存在，请进行更改");
+                                document.getElementById("regbtn").disabled=true;
                             }
                         }
                     })

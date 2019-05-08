@@ -1,5 +1,6 @@
 package com.klee.AdminLogin.pojo;
 
+
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -16,4 +17,5 @@ public class Admin {
 
     private  String adminSex;
 
-}
+
+ }

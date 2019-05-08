@@ -20,6 +20,29 @@
         });
 
         $(function () {
+            var adminnames=$("#adminname").val();
+            $("#adminname").blur(function () {
+                var adminname=$("#adminname").val();
+                $.ajax({
+                    type:'post',
+                    url:'checkReg',
+                    data:{adminName:adminname},
+                    success:function (data) {
+                        if (data==1){
+                            document.getElementById("regbtn").disabled=false;
+                        }
+                        if (data==0){
+                           if ($("#adminname").val()==adminnames){
+                               document.getElementById("regbtn").disabled=false;
+                           }
+                           else {
+                               alert('用户已存在，请更换!');
+                               document.getElementById("regbtn").disabled=true;
+                           }
+                        }
+                    }
+                })
+            })
             $("#regbtn").click(function () {
                 var adminname=$("#adminname").val();
                 var adminpwd=$("#adminpwd").val();
