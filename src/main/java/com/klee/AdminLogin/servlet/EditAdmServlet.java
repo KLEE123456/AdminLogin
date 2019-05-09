@@ -1,7 +1,7 @@
 package com.klee.AdminLogin.servlet;
 
 import com.klee.AdminLogin.pojo.Admin;
-import com.klee.AdminLogin.service.EditAdmService;
+import com.klee.AdminLogin.service.AdminService;
 import com.klee.AdminLogin.utils.Md5Encrypt;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -30,9 +30,8 @@ public class EditAdmServlet extends HttpServlet {
         admin.setAdminPhone(adminPhone);
         admin.setAdminSex(adminSex);
         admin.setAdminName(adminName);
-        ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
-        EditAdmService editAdmService=(EditAdmService) context.getBean("editAdmService");
-        int rows = editAdmService.editAdmin(admin);
+        AdminService adminService  = (AdminService) request.getSession().getAttribute("adminService");
+        int rows = adminService.editAdmin(admin);
         PrintWriter out=response.getWriter();
         if (rows>0){
             out.println("<script>alert('编辑成功!');location.href='selectAll.do'</script>");

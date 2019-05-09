@@ -1,7 +1,7 @@
 package com.klee.AdminLogin.servlet;
 
 import com.klee.AdminLogin.pojo.Admin;
-import com.klee.AdminLogin.service.RegisterService;
+import com.klee.AdminLogin.service.AdminService;
 import com.klee.AdminLogin.utils.Md5Encrypt;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,6 +16,14 @@ import java.io.PrintWriter;
 
 @WebServlet("/register.do")
 public class RegisterServlet extends HttpServlet {
+    ApplicationContext context=null;
+    AdminService adminService=null;
+    @Override
+    public void init() throws ServletException {
+       context=new ClassPathXmlApplicationContext("spring-config.xml");
+       adminService=(AdminService)context.getBean("adminService");
+    }
+
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String adminName=request.getParameter("adminname");
@@ -28,9 +36,7 @@ public class RegisterServlet extends HttpServlet {
         admin.setAdminPwd(MD5adminPwd);
         admin.setAdminPhone(adminPhone);
         admin.setAdminSex(adminSex);
-        ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
-        RegisterService registerService =(RegisterService) context.getBean("registerService");
-        int rows = registerService.registerAdminService(admin);
+        int rows = adminService.registerAdminService(admin);
         PrintWriter out=response.getWriter();
         if (rows>0){
             out.println("<script>alert('注册成功!');location.href='index.jsp'</script>");

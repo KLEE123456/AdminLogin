@@ -1,7 +1,6 @@
 package com.klee.AdminLogin.servlet;
 
-import com.klee.AdminLogin.service.DelAdmService;
-import com.klee.AdminLogin.service.LoginService;
+import com.klee.AdminLogin.service.AdminService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,11 +19,10 @@ public class DelAdmServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String adminId=request.getParameter("adminid");
         String pageNum=request.getParameter("pageNum");
-        ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
         HttpSession session=request.getSession();
         session.setAttribute("pageNum",pageNum);
-        DelAdmService delAdmService=(DelAdmService)context.getBean("delAdmService");
-        int rows = delAdmService.deleteAdmin(adminId);
+        AdminService adminService  = (AdminService) request.getSession().getAttribute("adminService");
+        int rows = adminService.deleteAdmin(adminId);
         PrintWriter out=response.getWriter();
         if (rows>0){
            out.println("<script>alert('删除成功!');location.href='selectAll.do'</script>");

@@ -2,7 +2,7 @@ package com.klee.AdminLogin.servlet;
 
 import com.github.pagehelper.PageInfo;
 import com.klee.AdminLogin.pojo.Admin;
-import com.klee.AdminLogin.service.AdminListService;
+import com.klee.AdminLogin.service.AdminService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/selectAll.do")
@@ -36,8 +35,8 @@ public class AdminListServlet extends HttpServlet {
         else {
             pageNum=Integer.parseInt(pageNums);
         }
-        AdminListService adminListService=(AdminListService)context.getBean("adminListService");
-        List<Admin> adminList = adminListService.findAllAdminService(pageNum);
+        AdminService adminService  = (AdminService) request.getSession().getAttribute("adminService");
+        List<Admin> adminList = adminService.findAllAdminService(pageNum);
         request.setAttribute("adminList",adminList);
         PageInfo pageInfo=new PageInfo(adminList);
         request.setAttribute("page",pageInfo);

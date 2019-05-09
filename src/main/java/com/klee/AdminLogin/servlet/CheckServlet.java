@@ -1,7 +1,7 @@
 package com.klee.AdminLogin.servlet;
 
 import com.klee.AdminLogin.pojo.Admin;
-import com.klee.AdminLogin.service.RegisterService;
+import com.klee.AdminLogin.service.AdminService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,8 +19,8 @@ public class CheckServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String adminName=request.getParameter("adminName");
         ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
-        RegisterService registerService = (RegisterService) context.getBean("registerService");
-        Admin adminByName = registerService.findAdminByName(adminName);
+        AdminService adminService  = (AdminService) context.getBean("adminService");
+        Admin adminByName = adminService.findAdminByName(adminName);
         PrintWriter out=response.getWriter();
         if (adminByName==null){
             out.print(1);

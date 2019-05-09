@@ -1,7 +1,7 @@
 package com.klee.AdminLogin.servlet;
 
 import com.klee.AdminLogin.pojo.Admin;
-import com.klee.AdminLogin.service.AddAdminService;
+import com.klee.AdminLogin.service.AdminService;
 import com.klee.AdminLogin.utils.Md5Encrypt;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -28,9 +29,8 @@ public class AddAdminServlet extends HttpServlet {
         admin.setAdminPwd(md5Pwd);
         admin.setAdminPhone(adminPhone);
         admin.setAdminSex(adminSex);
-        ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
-        AddAdminService addAdmService = (AddAdminService) context.getBean("addAdmService");
-        int rows = addAdmService.insertAdmin(admin);
+        AdminService adminService=(AdminService) request.getSession().getAttribute("adminService");
+        int rows = adminService.insertAdmin(admin);
         PrintWriter out=response.getWriter();
         if (rows>0){
             out.print("<script>alert('添加成功!');location.href='selectAll.do'</script>");

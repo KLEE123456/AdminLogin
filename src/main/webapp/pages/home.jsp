@@ -30,10 +30,6 @@
             $("#rlogin").click(function () {
                 $("#form1").submit();
             })
-           /* if (${page.pageNum}==${page.pages}){
-              document.getElementById("downPage").class=disabled;
-            }
-*/
         })
     </script>
     <style type="text/css">
@@ -54,6 +50,11 @@
                     <input type="button" value="新增信息" name="add" id="addId" style="background-color:#0062cc;width:100%;color: white" >
                 </td>
             </tr>
+           <%-- <tr>
+                <td>
+                   <input type="text" placeholder="请输入要查询的用户名" id="">
+                </td>
+            </tr>--%>
             <tr align="center" bgcolor="#ffebcd" height="30px">
                 <td>序号</td>
                 <td>用户id</td>
@@ -66,7 +67,7 @@
         <c:choose>
             <c:when test="${adminList.size()==0}">
                 <tr>
-                    <td colspan="6" height="50px" align="center">
+                    <td colspan="7" height="50px" align="center">
                         <b>&lt;不存在用户信息!&gt;</b>
                     </td>
                 </tr>

@@ -1,7 +1,7 @@
 package com.klee.AdminLogin.servlet;
 
 import com.klee.AdminLogin.pojo.Admin;
-import com.klee.AdminLogin.service.XRAdminSerrvice;
+import com.klee.AdminLogin.service.AdminService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -21,9 +21,8 @@ public class XRServlet extends HttpServlet {
         String pageNum=request.getParameter("pageNum");
         HttpSession session=request.getSession();
         session.setAttribute("pageNum",pageNum);
-        ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
-        XRAdminSerrvice xRAdminSerrvice = (XRAdminSerrvice)context.getBean("xRAdminSerrvice");
-        Admin admin = xRAdminSerrvice.xRAdmin(Integer.parseInt(adminId));
+        AdminService adminService  = (AdminService) request.getSession().getAttribute("adminService");
+        Admin admin = adminService.xRAdmin(Integer.parseInt(adminId));
         request.setAttribute("admin",admin);
         request.getRequestDispatcher("edit.jsp").forward(request,response);
     }
