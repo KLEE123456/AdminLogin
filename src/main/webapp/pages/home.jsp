@@ -50,11 +50,6 @@
                     <input type="button" value="新增信息" name="add" id="addId" style="background-color:#0062cc;width:100%;color: white" >
                 </td>
             </tr>
-           <%-- <tr>
-                <td>
-                   <input type="text" placeholder="请输入要查询的用户名" id="">
-                </td>
-            </tr>--%>
             <tr align="center" bgcolor="#ffebcd" height="30px">
                 <td>序号</td>
                 <td>用户id</td>
