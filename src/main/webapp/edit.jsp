@@ -60,7 +60,7 @@
                     alert("请输入电话号码!");
                     return;
                 }
-                if (adminsex==''){
+                if (adminsex==null){
                     alert("请选择性别!");
                     return;
                 }

@@ -32,9 +32,14 @@
     <select id="findAdminByName" resultMap="myResultMap" parameterType="string">
         select  * from  admin_ where  adminname=#{adminName}
     </select>
+
     <insert id="insertAdmin" parameterType="admin">
         insert into  admin_  values (default ,#{adminName} ,#{adminPhone} ,#{adminPwd} ,#{adminSex} )
     </insert>
+    <select id="findLikeByAdminName" resultMap="myResultMap" parameterType="string">
 
+      select  * from  admin_ where  adminname like concat('%',#{adminName} ,'%')
+
+    </select>
 
 </mapper>

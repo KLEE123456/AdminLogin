@@ -6,10 +6,14 @@ import com.klee.AdminLogin.pojo.Admin;
 import com.klee.AdminLogin.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service("adminService")
+@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = false)
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
@@ -68,5 +72,12 @@ public class AdminServiceImpl implements AdminService {
     public Admin findAdminSerivce(Admin admin) {
         Admin admin1 = adminMapper.findAdmin(admin);
         return admin1;
+    }
+
+    @Override
+    public List<Admin> findLikeByAdminName(int pageNum,String adminName) {
+        PageHelper.startPage(pageNum,5);
+        List<Admin> likeByAdminName = adminMapper.findLikeByAdminName(adminName);
+        return likeByAdminName;
     }
 }

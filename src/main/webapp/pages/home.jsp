@@ -30,6 +30,14 @@
             $("#rlogin").click(function () {
                 $("#form1").submit();
             })
+            $("#btn").click(function () {
+               var adminName=$("#adminName").val();
+               if (adminName==''){
+                   alert('请输入用户名!');
+                   return;
+               }
+                $("#form").submit();
+            })
         })
     </script>
     <style type="text/css">
@@ -43,11 +51,20 @@
 <body>
 <center><h2>***************欢迎进入系统***************</h2></center>
 
-        <table width="90%" align="center"  class="table-striped table-bordered">
+        <table width="90%" align="center"  class="table-striped table-bordered" id="talbe">
             <tr>
                 <td colspan="6"><i style="color: #005cbf">~hi,亲爱的<font color="#ff7f50">${admin.adminName}</font></i></td>
                 <td>
                     <input type="button" value="新增信息" name="add" id="addId" style="background-color:#0062cc;width:100%;color: white" >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <form action="selectAll.do" method="post" id="form" name="form" style="border: 0px;margin: 0px">
+                        <input type="text" placeholder="请输入用户名" id="adminName" name="adminName">
+                        <input type="button" value="查询" id="btn" name="btn" style="background-color:#0062cc;width:60px;color: white">
+                        <input type="hidden" value="flag" id="flagId" name="flagName">
+                    </form>
                 </td>
             </tr>
             <tr align="center" bgcolor="#ffebcd" height="30px">

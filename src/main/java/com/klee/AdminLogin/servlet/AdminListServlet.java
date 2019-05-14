@@ -19,7 +19,6 @@ import java.util.List;
 public class AdminListServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ApplicationContext context=new ClassPathXmlApplicationContext("spring-config.xml");
         HttpSession session=request.getSession();
         String editOrdelPageNum= (String)session.getAttribute("pageNum");
         String pageNums=request.getParameter("pageNum");
@@ -36,11 +35,23 @@ public class AdminListServlet extends HttpServlet {
             pageNum=Integer.parseInt(pageNums);
         }
         AdminService adminService  = (AdminService) request.getSession().getAttribute("adminService");
-        List<Admin> adminList = adminService.findAllAdminService(pageNum);
-        request.setAttribute("adminList",adminList);
-        PageInfo pageInfo=new PageInfo(adminList);
-        request.setAttribute("page",pageInfo);
+       String flag=request.getParameter("flagName");
+        if (flag==null){
+            List<Admin> adminList = adminService.findAllAdminService(pageNum);
+            request.setAttribute("adminList",adminList);
+            PageInfo pageInfo=new PageInfo(adminList);
+            request.setAttribute("page",pageInfo);
+        }
+        else {
+            String adminName=request.getParameter("adminName");
+            List<Admin> adminList = adminService.findLikeByAdminName(pageNum,adminName);
+            request.setAttribute("adminList",adminList);
+            PageInfo pageInfo=new PageInfo(adminList);
+            request.setAttribute("page",pageInfo);
+        }
+
         request.getRequestDispatcher("pages/home.jsp").forward(request,response);
 
     }
+
 }

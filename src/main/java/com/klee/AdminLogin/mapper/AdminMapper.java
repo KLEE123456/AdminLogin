@@ -13,4 +13,5 @@ public interface AdminMapper {
     Admin xRAdmin(int id);
     Admin findAdminByName(String adminName);
     int insertAdmin(Admin admin);
+    List<Admin> findLikeByAdminName(String adminName);
 }

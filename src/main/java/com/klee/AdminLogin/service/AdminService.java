@@ -13,4 +13,5 @@ public interface AdminService {
     int registerAdminService(Admin admin);
     Admin findAdminByName(String adminName);
     Admin xRAdmin(int id);
+    List<Admin> findLikeByAdminName(int pageNum,String adminName);
 }
